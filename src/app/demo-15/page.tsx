@@ -15,20 +15,6 @@ import Topbar from "components/elements/Topbar";
 export default function Demo15() {
   return (
     <Fragment>
-      {/* ========== topbar section ========== */}
-      <Topbar />
-      {/* ========== header ========== */}
-
-      <header className="wrapper bg-soft-primary">
-        <Navbar
-          info
-          search
-          stickyBox={false}
-          logoAlt="logo-light"
-          navClassName="navbar navbar-expand-lg center-nav transparent position-absolute navbar-dark caret-none"
-        />
-      </header>
-
       {/* ========== main content ========== */}
       <main className="content-wrapper">
         {/* ========== hero sections ========== */}
@@ -61,7 +47,6 @@ export default function Demo15() {
       </main>
 
       {/* ========== footer section ========== */}
-      <Footer9 />
     </Fragment>
   );
 }

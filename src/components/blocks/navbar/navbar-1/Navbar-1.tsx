@@ -16,13 +16,9 @@ import Signup from "../components/signup";
 import MiniCart from "../components/mini-cart";
 import HeaderRight from "../components/header-right";
 import FancyHeader from "../components/fancy-header";
-import BlogNavItem from "../components/blog-nav-item";
-import DemosNavItem from "../components/demos-nav-item";
-import PagesNavItem from "../components/pages-nav-item";
-import BlocksNavItem from "../components/blocks-nav-item";
-import ProjectsNavItem from "../components/projects-nav-item";
-import DocumentationNavItem from "../components/documentation-nav-item";
-import DropdownToggleLink from "components/reuseable/links/DropdownToggleLink";
+import Startup from "../components/startup";
+import { usePathname } from "next/navigation";
+
 // ===================================================================
 interface NavbarProps {
   info?: boolean;
@@ -58,100 +54,77 @@ export default function NavbarOne({
 
   // dynamically render the logo
   const logo = sticky ? "logo-dark" : logoAlt;
-
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
+  const navbarBg = isHomepage ? "bg-transparent" : "bg-primary";
   // all main header contents
   const headerContent = (
     <Fragment>
-      <div className="navbar-brand w-100">
-        <NextLink
-          href="/"
-          title={
-            <img
-              alt="logo"
-              src={`/img/${logo}.png`}
-              srcSet={`/img/${logo}@2x.png 2x`}
+      <div className={`${navbarBg}  `}>
+        <div className="container d-flex flex-lg-row flex-nowrap align-items-center">
+          <div className="navbar-brand w-100">
+            <NextLink
+              href="/"
+              title={
+                <img
+                  alt="logo"
+                  src={`/img/${logo}.png`}
+                  srcSet={`/img/${logo}@2x.png 2x`}
+                />
+              }
             />
-          }
-        />
-      </div>
+          </div>
 
-      <div
-        id="offcanvas-nav"
-        data-bs-scroll="true"
-        className="navbar-collapse offcanvas offcanvas-nav offcanvas-start"
-      >
-        <div className="offcanvas-header d-lg-none">
-          <h3 className="text-white fs-30 mb-0">Sandbox</h3>
-          <button
-            type="button"
-            aria-label="Close"
-            data-bs-dismiss="offcanvas"
-            className="btn-close btn-close-white ms-auto"
-          />
-        </div>
-
-        <div className="offcanvas-body ms-lg-auto d-flex flex-column h-100">
-          <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-              <DropdownToggleLink
-                title="About us"
-                className="nav-link dropdown-toggle"
+          <div
+            id="offcanvas-nav"
+            data-bs-scroll="true"
+            className="navbar-collapse offcanvas offcanvas-nav offcanvas-start"
+          >
+            <div className="offcanvas-header d-lg-none">
+              <h3 className="text-white fs-30 mb-0">Sandbox</h3>
+              <button
+                type="button"
+                aria-label="Close"
+                data-bs-dismiss="offcanvas"
+                className="btn-close btn-close-white ms-auto"
               />
-              <ul className="dropdown-menu">
-                <li className="dropdown dropdown-submenu dropend">
-                  <DropdownToggleLink
-                    title="About us1"
-                    className="dropdown-item dropdown-toggle"
-                  />
-                </li>
+            </div>
+
+            <div className="offcanvas-body ms-lg-auto d-flex flex-column h-100">
+              <ul className="navbar-nav">
+                {/* ===================== Startup nav item ===================== */}
+                <Startup />
               </ul>
-            </li>
-            {/* ===================== demos nav item ===================== */}
-            {/* <DemosNavItem /> */}
 
-            {/*  ===================== pages nav item  ===================== */}
-            {/* <PagesNavItem /> */}
-
-            {/* ===================== projects nav item  ===================== */}
-            {/* <ProjectsNavItem /> */}
-
-            {/* ===================== blog nav item ===================== */}
-            {/* <BlogNavItem /> */}
-
-            {/* ===================== blocks nav item ===================== */}
-            {/* <BlocksNavItem /> */}
-
-            {/* ===================== documentation nav item ===================== */}
-            {/* <DocumentationNavItem /> */}
-          </ul>
-
-          {/* ============= show contact info in the small device sidebar ============= */}
-          <div className="offcanvas-footer d-lg-none">
-            <div>
-              <NextLink
-                title="info@email.com"
-                className="link-inverse"
-                href="mailto:first.last@email.com"
-              />
-              <br />
-              <NextLink href="tel:0123456789" title="00 (123) 456 78 90" />
-              <br />
-              <SocialLinks />
+              {/* ============= show contact info in the small device sidebar ============= */}
+              <div className="offcanvas-footer d-lg-none">
+                <div>
+                  <NextLink
+                    title="info@email.com"
+                    className="link-inverse"
+                    href="mailto:first.last@email.com"
+                  />
+                  <br />
+                  <NextLink href="tel:0123456789" title="00 (123) 456 78 90" />
+                  <br />
+                  <SocialLinks />
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* ============= right side header content ============= */}
+          <HeaderRight
+            cart={cart}
+            info={info}
+            button={button}
+            search={search}
+            social={social}
+            language={language}
+            navOtherClass={navOtherClass}
+          />
         </div>
       </div>
-
-      {/* ============= right side header content ============= */}
-      <HeaderRight
-        cart={cart}
-        info={info}
-        button={button}
-        search={search}
-        social={social}
-        language={language}
-        navOtherClass={navOtherClass}
-      />
     </Fragment>
   );
 
@@ -174,9 +147,7 @@ export default function NavbarOne({
         {fancy ? (
           <FancyHeader>{headerContent}</FancyHeader>
         ) : (
-          <div className="container flex-lg-row flex-nowrap align-items-center">
-            {headerContent}
-          </div>
+          <div className="w-100">{headerContent}</div>
         )}
       </nav>
 

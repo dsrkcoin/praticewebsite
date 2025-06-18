@@ -39,6 +39,16 @@ const demos = [
 ];
 
 // pages navigations
+const startupLink = [
+   {
+    id: 1,
+    title: "Startup",
+    children: [
+      { id: 1, title: "Proprietorship", url: "/proprietorship" },
+      
+    ]
+  }
+]
 const pages = [
   {
     id: 21,
@@ -56,6 +66,7 @@ const pages = [
       { id: 222, title: "About II", url: "/about-2" }
     ]
   },
+  
   {
     id: 23,
     title: "Shop",
@@ -95,6 +106,14 @@ const pages = [
       { id: 264, title: "Register I", url: "/register-1" },
       { id: 265, title: "Register II", url: "/register-2" },
       { id: 266, title: "Terms & Condition", url: "/terms" }
+    ]
+  },
+  {
+    id: 27,
+    title: "Startup",
+    children: [
+      { id: 267, title: "Proprietorship", url: "/Proprietorship" },
+      
     ]
   }
 ];
@@ -218,4 +237,4 @@ const blocksNavigation = [
   }
 ];
 
-export { demos, pages, blogsNavigation, blocksNavigation, projectsNavigation, documentationNavigation };
+export { startupLink, demos, pages, blogsNavigation, blocksNavigation, projectsNavigation, documentationNavigation };
